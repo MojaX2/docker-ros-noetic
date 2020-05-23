@@ -1,4 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:focal
+# FROM 10.1-cudnn7-runtime-ubuntu20.04
+
 # 以下の公式リポジトリを参考
 # https://github.com/osrf/docker_images/blob/master/ros/melodic/ubuntu/bionic/ros-core/Dockerfile
 
@@ -15,11 +17,11 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     gnupg2 \
     && rm -rf /var/lib/apt/lists/*
 
-# setup sources.list
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list'
-
 # setup keys
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+# setup sources.list
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list'
 
 # setup environment
 ENV LANG C.UTF-8
