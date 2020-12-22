@@ -1,5 +1,5 @@
 # FROM ubuntu:focal
-FROM vistart/cuda:10.1-cudnn7-runtime-ubuntu20.04
+FROM nvcr.io/nvidia/pytorch:20.12-py3
 
 # 以下の公式リポジトリを参考
 # https://github.com/osrf/docker_images/blob/master/ros/melodic/ubuntu/bionic/ros-core/Dockerfile
@@ -41,27 +41,6 @@ RUN chmod +x /ros_entrypoint.sh
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
-# install transformers pytorch gpu
-# https://github.com/huggingface/transformers/blob/master/docker/transformers-pytorch-gpu/Dockerfile
-RUN apt update && \
-    apt install -y bash \
-                   build-essential \
-                   git \
-                   curl \
-                   ca-certificates \
-                   python3 \
-                   python3-pip && \
-    rm -rf /var/lib/apt/lists
-
-RUN python3 -m pip install --no-cache-dir --upgrade pip && \
-    python3 -m pip install --no-cache-dir \
-    mkl \
-    torch \
-    ipython
-
 WORKDIR /workspace
-RUN git clone https://github.com/huggingface/transformers.git
-RUN cd transformers/ && \
-    python3 -m pip install --no-cache-dir .
 
 CMD ["bash"]
