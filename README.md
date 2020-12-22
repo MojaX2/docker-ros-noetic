@@ -1,5 +1,7 @@
 # docker-ros-noetic
 
+docker, ros, noetic, cuda, pytorch
+
 ```bash
 docker build . -t moja2/docker-ros-noetic
 ```
@@ -15,6 +17,5 @@ $ docker run -it --rm --net=host moja2/docker-ros-noetic rosrun roscpp_tutorials
 
 http://wiki.ros.org/noetic
 
-cuda 
 
-https://hub.docker.com/r/vistart/cuda
+https://ngc.nvidia.com/catalog/containers/nvidia:pytorch
